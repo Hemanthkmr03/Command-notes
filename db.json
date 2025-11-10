@@ -1,0 +1,120 @@
+{
+  "commandsList": [
+    {
+      "id": "1",
+      "name": "npm init"
+    },
+    {
+      "id": "2",
+      "name": "npm install"
+    },
+    {
+      "id": "3",
+      "name": "npm install <package>"
+    },
+    {
+      "id": "4",
+      "name": "npm install -g <package>"
+    },
+    {
+      "id": "5",
+      "name": "npm uninstall <package>"
+    },
+    {
+      "id": "6",
+      "name": "npm update"
+    },
+    {
+      "id": "7",
+      "name": "npm update <package>"
+    },
+    {
+      "id": "8",
+      "name": "npm run <script>"
+    },
+    {
+      "id": "9",
+      "name": "npm start"
+    },
+    {
+      "id": "10",
+      "name": "npm test"
+    },
+    {
+      "id": "11",
+      "name": "npm build"
+    },
+    {
+      "id": "12",
+      "name": "npm audit"
+    },
+    {
+      "id": "13",
+      "name": "npm audit fix"
+    },
+    {
+      "id": "14",
+      "name": "npm list"
+    },
+    {
+      "id": "15",
+      "name": "npm outdated"
+    },
+    {
+      "id": "16",
+      "name": "npm cache clean --force"
+    },
+    {
+      "id": "17",
+      "name": "npm root"
+    },
+    {
+      "id": "18",
+      "name": "npm root -g"
+    },
+    {
+      "id": "19",
+      "name": "npm config list"
+    },
+    {
+      "id": "20",
+      "name": "npm config set <key> <value>"
+    },
+    {
+      "id": "21",
+      "name": "npm login"
+    },
+    {
+      "id": "22",
+      "name": "npm logout"
+    },
+    {
+      "id": "23",
+      "name": "npm publish"
+    },
+    {
+      "id": "24",
+      "name": "npm version <update_type>"
+    },
+    {
+      "id": "25",
+      "name": "npm ci"
+    },
+    {
+      "id": "26",
+      "name": "npm prune"
+    },
+    {
+      "id": "27",
+      "name": "npm dedupe"
+    },
+    {
+      "id": "8b72",
+      "name": "asdasda"
+    },
+    {
+      "id": "09bd",
+      "name": "one"
+    }
+  ]
+}
