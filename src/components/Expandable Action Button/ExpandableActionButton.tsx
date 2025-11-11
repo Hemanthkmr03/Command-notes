@@ -3,21 +3,16 @@ import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import AddCommandDialog from '../AddCommandDialog/AddCommandDialog';
+import Theme from '../Theme/Theme';
+import { useThemeContext } from '../../context/ThemeContext';
 
-
-interface Action {
-    icon: React.ReactNode;
-    name: string
-}
-
-const actions: Action[] = [
-    { icon: <AddIcon />, name: 'Add' },
-];
 
 export default function ExpandableActionButton() {
     const [openAddDialog, setOpenAddDialog] = useState<boolean>(false);
+    const { toggleTheme } = useThemeContext();
 
     return (
         <Box sx={{
@@ -39,13 +34,13 @@ export default function ExpandableActionButton() {
                     setOpenAddDialog={setOpenAddDialog}
                 />
                 <SpeedDial
-                    ariaLabel="SpeedDial playground example"
+                    ariaLabel="SpeedDial Actions"
                     icon={<ArrowCircleLeftIcon />}
                     direction="left"
                     sx={{ position: 'fixed', bottom: 20, right: 20, }}
 
                 >
-                    {actions.map((action) => (
+                    {/* {actions.map((action) => (
                         <SpeedDialAction
                             key={action.name}
                             icon={action.icon}
@@ -56,7 +51,26 @@ export default function ExpandableActionButton() {
                                 },
                             }}
                         />
-                    ))}
+                    ))} */}
+
+                    <SpeedDialAction
+                        key="Add"
+                        icon={<AddIcon />}
+                        onClick={() => setOpenAddDialog(true)}
+                        tooltipTitle="Add"
+
+                    />
+                    <SpeedDialAction
+                        key="Edit"
+                        icon={<EditIcon />}
+                        onClick={() => console.log("Edit clicked")}
+                    />
+                    <SpeedDialAction
+                        key='Theme'
+                        icon={<Theme />}
+                        onClick={toggleTheme}
+                        tooltipTitle="Toggle Theme"
+                    />
                 </SpeedDial>
             </Box>
         </Box>

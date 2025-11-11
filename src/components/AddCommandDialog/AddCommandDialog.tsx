@@ -57,10 +57,10 @@ export default function AddCommandDialog({ openAddDialog, setOpenAddDialog }) {
                 onClose={handleClose}
                 PaperProps={{
                     sx: {
-                        width: '500px',      // fixed width
-                        maxWidth: '90vw',    // prevents overflow on small screens
-                        borderRadius: 2,     // optional
-                        p: 2,                // optional padding
+                        width: '500px',
+                        maxWidth: '90vw',
+                        borderRadius: 2,
+                        p: 2,
                     },
                 }}
             >

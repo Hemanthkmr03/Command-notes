@@ -3,6 +3,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Button } from '@mui/material';
 import React from 'react';
+import { useTheme } from '@emotion/react';
 
 interface Command {
     id: string;
@@ -16,6 +17,11 @@ interface CommandCardProps {
 
 
 const CommandCard: React.FC<CommandCardProps> = ({ commandsList }) => {
+
+    const theme = useTheme();
+
+    const isDark = theme.palette.mode === "dark";
+
     const handleDelete = (command: string) => {
         console.log("Delete", command);
     }
@@ -34,9 +40,15 @@ const CommandCard: React.FC<CommandCardProps> = ({ commandsList }) => {
     return (
         <ul className='command-card'>
             {commandsList.map((item: Command) => (
-                <li className='command-card-cmd' key={item.id}>
+                <li
+                    style={{
+                        background: isDark ? "#161616" : "#FFFFFF",
+                        borderLeft: isDark ? "4px solid #FFFFFF" : "4px solid #214966",
+                    }} className='command-card-cmd ' key={item.id}>
                     <div className='left'>
-                        <p className='command-cmd'>
+                        <p className='command-cmd'
+                            style={{ color: isDark ? "#FFFFFF" : "#214966" }}
+                        >
                             {item.name}
                         </p>
                     </div>

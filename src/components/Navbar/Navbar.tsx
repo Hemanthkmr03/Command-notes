@@ -19,9 +19,8 @@ export default function Navbar() {
         display: "flex",
         justifyContent: "center",
         background: theme.palette.mode === "light" ? "#fafafa" : "#141416ff",
-        height: '10vh',
+        minHeight: '5vh',
         alignItems: "center",
-        boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px"
       }}>
 
       <Tabs
@@ -32,19 +31,20 @@ export default function Navbar() {
           display: "flex",
           justifyContent: "center",
           "& .MuiTabs-indicator": {
-            backgroundColor: "#9E3FFD",
+            backgroundColor: theme.palette.mode === "light" ? "#214966" : "#FFFFFF",
           },
           "& .MuiTab-root": {
             color: theme.palette.text.primary,
+            fontWeight: "600",
             "&.Mui-selected": {
-              color: "#9E3FFD",
+              color: theme.palette.mode === "light" ? "#214966" : "#FFFFFF",
             }
           },
         }}
       >
-        <Tab label="Commands" component={Link} to='/' />
-        <Tab label="Notes" component={Link} to='/notes' />
+        <Tab className='tabs' label="Commands" component={Link} to='/' />
+        <Tab className='tabs' label="Notes" component={Link} to='/notes' />
       </Tabs>
-    </Box>
+    </Box >
   );
 }

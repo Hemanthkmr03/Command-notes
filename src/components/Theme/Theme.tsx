@@ -4,16 +4,15 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import { useThemeContext } from '../../context/ThemeContext';
 
 const Theme = () => {
-    // const [theme, setTheme] = useState();
-    const { mode, toggleTheme } = useThemeContext();
+    const { mode } = useThemeContext();
     return (
-        <div className='theme' onClick={toggleTheme}>
+        <>
             {mode === "light" ? (
-                <DarkModeIcon sx={{ cursor: 'pointer', color: '#333' }} />
+                <DarkModeIcon sx={{ cursor: 'pointer', color: '#214966' }} />
             ) : (
-                <LightModeIcon sx={{ cursor: 'pointer', color: 'yellow' }} />
+                <LightModeIcon sx={{ cursor: 'pointer', color: '#fff' }} />
             )}
-        </div>
+        </>
     )
 }
 

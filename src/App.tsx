@@ -16,7 +16,7 @@ function App() {
         background: theme.palette.background.default
       }}>
       <Navbar />
-      <Theme />
+      {/* <Theme /> */}
       <Routes>
         <Route path='/' element={<CommandsPage />} />
         <Route path='/notes' element={<NotesPage />} />

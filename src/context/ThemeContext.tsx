@@ -26,10 +26,11 @@ export const CustomThemeProvider: React.FC<{ children: React.ReactNode }> = ({ c
                 palette: {
                     mode,
                     background: {
-                        default: mode === "light" ? "#fafafa" : "#141720",
+                        default: mode === "light" ? "#ECECEC" : "#252627",
+                        secondary: mode === "light" ? "#FFFFFF" : "#161616",
                     },
                     text: {
-                        primary: mode === "light" ? "#111" : "#fff",
+                        primary: mode === "light" ? "#214966" : "#fff",
                     },
                 },
             }),
