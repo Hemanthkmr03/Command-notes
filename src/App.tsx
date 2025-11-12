@@ -3,12 +3,12 @@ import './App.css'
 import CommandsPage from './pages/CommandsPage/CommandsPage'
 import NotesPage from './pages/NotesPage/NotesPage'
 import Navbar from './components/Navbar/Navbar'
-import ExpandableActionButton from './components/Expandable Action Button/ExpandableActionButton'
-import Theme from './components/Theme/Theme'
 import { Box, useTheme } from '@mui/material'
+import { useState } from 'react'
 
 function App() {
   const theme = useTheme();
+  const [showEditMode, setShowEditMode] = useState<Boolean>(false);
 
   return (
     <Box className='app'
@@ -16,13 +16,11 @@ function App() {
         background: theme.palette.background.default
       }}>
       <Navbar />
-      {/* <Theme /> */}
       <Routes>
-        <Route path='/' element={<CommandsPage />} />
+        <Route path='/' element={<CommandsPage showEditMode={showEditMode} setShowEditMode={setShowEditMode} />} />
         <Route path='/notes' element={<NotesPage />} />
-        <Route path='*' element={<CommandsPage />} />
+        <Route path='*' element={<CommandsPage showEditMode={showEditMode} setShowEditMode={setShowEditMode} />} />
       </Routes>
-      <ExpandableActionButton />
     </Box>
   )
 }

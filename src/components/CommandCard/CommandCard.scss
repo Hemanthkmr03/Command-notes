@@ -16,7 +16,7 @@
     }
 
     &:hover .right {
-      opacity: 1;
+      // opacity: 1;
       button {
         display: inline-block;
       }
@@ -25,19 +25,14 @@
     .right {
       display: flex;
       gap: 10px;
-      opacity: 0;
+      // opacity: 0;
 
       button {
         // padding: 5px;
         background: transparent;
         border: none;
         cursor: pointer;
-        display: none;
-        color: white;
-
-        &:hover {
-          color: red;
-        }
+        // display: none;
       }
     }
   }

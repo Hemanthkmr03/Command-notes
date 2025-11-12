@@ -1,18 +1,26 @@
-import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
-import AddCommandDialog from '../AddCommandDialog/AddCommandDialog';
 import Theme from '../Theme/Theme';
 import { useThemeContext } from '../../context/ThemeContext';
 
 
-export default function ExpandableActionButton() {
-    const [openAddDialog, setOpenAddDialog] = useState<boolean>(false);
+interface ExpandableActionButtonProps {
+    showEditMode: boolean;
+    setShowEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+    setOpenAddDialog: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+
+export default function ExpandableActionButton({ showEditMode, setShowEditMode, setOpenAddDialog }: ExpandableActionButtonProps) {
     const { toggleTheme } = useThemeContext();
+
+    const handleEditToggle = () => {
+        setShowEditMode((prev) => !prev);
+    }
 
     return (
         <Box sx={{
@@ -29,10 +37,6 @@ export default function ExpandableActionButton() {
                 flexGrow: 1,
                 minHeight: '100vh'
             }}>
-                <AddCommandDialog
-                    openAddDialog={openAddDialog}
-                    setOpenAddDialog={setOpenAddDialog}
-                />
                 <SpeedDial
                     ariaLabel="SpeedDial Actions"
                     icon={<ArrowCircleLeftIcon />}
@@ -40,19 +44,6 @@ export default function ExpandableActionButton() {
                     sx={{ position: 'fixed', bottom: 20, right: 20, }}
 
                 >
-                    {/* {actions.map((action) => (
-                        <SpeedDialAction
-                            key={action.name}
-                            icon={action.icon}
-                            onClick={() => setOpenAddDialog(true)}
-                            slotProps={{
-                                tooltip: {
-                                    title: action.name,
-                                },
-                            }}
-                        />
-                    ))} */}
-
                     <SpeedDialAction
                         key="Add"
                         icon={<AddIcon />}
@@ -63,7 +54,8 @@ export default function ExpandableActionButton() {
                     <SpeedDialAction
                         key="Edit"
                         icon={<EditIcon />}
-                        onClick={() => console.log("Edit clicked")}
+                        onClick={handleEditToggle}
+                        tooltipTitle={showEditMode ? "Exit Edit Mode" : "Edit Mode"}
                     />
                     <SpeedDialAction
                         key='Theme'

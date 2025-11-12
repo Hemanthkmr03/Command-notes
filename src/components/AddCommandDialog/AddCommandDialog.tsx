@@ -1,54 +1,71 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import AddIcon from '@mui/icons-material/Add';
 import { DATA_ENDPOINT } from '../../constant.js';
+import { useTheme } from '@emotion/react';
 
 
 
-export default function AddCommandDialog({ openAddDialog, setOpenAddDialog }) {
-    // const [open, setOpen] = useState<boolean>(false);
+export default function AddCommandDialog({ openAddDialog, setOpenAddDialog, refreshData, editingCommand, setEditingCommand }) {
+    const theme = useTheme();
+    const isDark = theme.palette.mode === "dark";
     const [command, setCommand] = useState('');
 
-    const handleClickOpen = () => {
-        setOpenAddDialog(true);
-    };
+    useEffect(() => {
+        if (editingCommand) {
+            setCommand(editingCommand.name);
+        } else {
+            setCommand("")
+        }
+    }, [editingCommand]);
 
     const handleClose = () => {
         setOpenAddDialog(false);
+        setEditingCommand(null);
+        setCommand("");
     };
 
-    const handleAdd = async (a) => {
+    const handleSubmit = async () => {
         if (!command.trim()) return alert("Please enter a command");
 
         try {
-            await fetch(DATA_ENDPOINT, {
-                method: "POST",
-                headers: { "Content-type": 'application/json' },
-                body: JSON.stringify({ name: command }),
-            });
+            let res
+            if (editingCommand) {
 
-            alert("command added successfully!");
+                res = await fetch(`${DATA_ENDPOINT}/${editingCommand.id}.json`, {
+                    method: "PUT",
+                    headers: { "Content-type": 'application/json' },
+                    body: JSON.stringify({ name: command }),
+                });
+                if (!res.ok) throw new Error("Failed to update command")
+                alert("command updated successfully!");
+
+            } else {
+
+                const res = await fetch(`${DATA_ENDPOINT}.json`, {
+                    method: "POST",
+                    headers: { "Content-type": 'application/json' },
+                    body: JSON.stringify({ name: command }),
+                });
+                if (!res.ok) throw new Error("Failed to add command")
+                alert("command added successfully!");
+
+            }
+
             setCommand("");
             handleClose();
+            refreshData();
 
         } catch (error) {
             console.log("Error adding command:", error);
+            alert("Something went wrong.")
         }
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const formData = new FormData(event.currentTarget);
-        const formJson = Object.fromEntries(formData.entries());
-        const email = formJson.email;
-        console.log(email);
-        handleClose();
-    };
 
     return (
         <>
@@ -64,7 +81,7 @@ export default function AddCommandDialog({ openAddDialog, setOpenAddDialog }) {
                     },
                 }}
             >
-                <DialogTitle>Add Command</DialogTitle>
+                <DialogTitle sx={{ fontWeight: "700" }}>Add Command</DialogTitle>
                 <DialogContent>
                     <form id="subscription-form">
                         <TextField
@@ -73,18 +90,30 @@ export default function AddCommandDialog({ openAddDialog, setOpenAddDialog }) {
                             margin="dense"
                             id="name"
                             name="text"
-                            label="Add your command here"
+                            label={editingCommand ? "Edit your command" : "Add your command here"}
                             type="text"
                             fullWidth
-                            variant="standard"
+                            variant="outlined"
+                            value={command}
                             onChange={(e) => setCommand(e.target.value)}
                         />
                     </form>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleAdd} variant='contained'>
-                        Add
+                    <Button
+                        sx={{
+                            padding: "5px 50px",
+                            color: isDark ? "#fff" : "#214966", fontWeight: '600',
+                        }}
+                        onClick={handleClose}>Cancel</Button>
+                    <Button
+                        sx={{
+                            padding: "5px 50px",
+                            background: isDark ? "#FFFFFF" : "#214966", fontWeight: '600',
+                        }}
+                        onClick={handleSubmit}
+                        variant='contained'>
+                        {editingCommand ? "Update" : "Add"}
                     </Button>
                 </DialogActions>
             </Dialog >

@@ -4,6 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Button } from '@mui/material';
 import React from 'react';
 import { useTheme } from '@emotion/react';
+import { FaRegCopy } from "react-icons/fa";
 
 interface Command {
     id: string;
@@ -12,23 +13,15 @@ interface Command {
 
 interface CommandCardProps {
     commandsList: Command[];
+    showEditMode: boolean
+    onDelete: (id: string) => void;
+    onEdit: (id: string, currentName: string) => void;
 }
 
-
-
-const CommandCard: React.FC<CommandCardProps> = ({ commandsList }) => {
+const CommandCard: React.FC<CommandCardProps> = ({ commandsList, showEditMode, onDelete, onEdit }) => {
 
     const theme = useTheme();
-
     const isDark = theme.palette.mode === "dark";
-
-    const handleDelete = (command: string) => {
-        console.log("Delete", command);
-    }
-
-    const handleEdit = (command: string) => {
-        console.log("Edit", command);
-    }
 
     const handleCopy = (command: string) => {
         navigator.clipboard.writeText(command)
@@ -53,12 +46,31 @@ const CommandCard: React.FC<CommandCardProps> = ({ commandsList }) => {
                         </p>
                     </div>
                     <div className="right" >
-                        {/* <EditIcon onClick={() => handleEdit(item)} sx={{ cursor: "pointer", color: '#16163F' }} /> */}
-                        {/* <DeleteIcon onClick={() => handleDelete(item)} sx={{ cursor: "pointer", color: '#16163F' }} /> */}
-                        <Button
-                            sx={{ color: "black", margin: '0', padding: '0' }}
-                            onClick={
-                                () => handleCopy(item.name)}>Copy</Button>
+                        {showEditMode ? (
+                            <>
+                                <EditIcon
+                                    onClick={() => onEdit(item.id, item.name)}
+                                    sx={{
+                                        cursor: "pointer",
+                                        color: '#16163F'
+                                    }} />
+                                <DeleteIcon
+                                    onClick={() => onDelete(item.id)}
+                                    sx={{
+                                        cursor: "pointer",
+                                        color: '#16163F'
+                                    }} />
+                            </>
+                        ) : (
+                            <Button
+                                sx={{
+                                    color: isDark ? "white" : "black",
+                                    margin: '0',
+                                    padding: '0'
+                                }}
+                                onClick={
+                                    () => handleCopy(item.name)}>{<FaRegCopy size={18} />}</Button>
+                        )}
                     </div>
                 </li>
             ))}

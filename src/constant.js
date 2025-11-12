@@ -1,1 +1,1 @@
-export const DATA_ENDPOINT = "http://localhost:3000/commandsList"
+export const DATA_ENDPOINT = "https://commands-nodes-handler-default-rtdb.firebaseio.com/commands"
