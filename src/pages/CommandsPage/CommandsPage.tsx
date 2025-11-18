@@ -5,6 +5,7 @@ import { DATA_ENDPOINT } from '../../constant.ts'
 import AddCommandDialog from '../../components/AddCommandDialog/AddCommandDialog.js';
 import ExpandableActionButton from '../../components/Expandable Action Button/ExpandableActionButton.js';
 import { useSnackbar } from '../../context/SnackbarContext.js';
+import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog.tsx';
 
 interface CommandsPageProps {
   showEditMode: boolean;
@@ -21,7 +22,14 @@ const CommandsPage: React.FC<CommandsPageProps> = ({ showEditMode, setShowEditMo
   const [commandsList, setCommandList] = useState<Command[]>([]);
   const [openAddDialog, setOpenAddDialog] = useState<boolean>(false);
   const [editingCommand, setEditingCommand] = useState<Command | null>(null);
+
+  const [confirmOpen, setConfirmOpen] = useState<boolean>(false)
+  const [deleteId, setDeleteId] = useState<string | null>(null)
+
   const { showSnackbar } = useSnackbar();
+
+
+
 
   const fetchData = async () => {
     try {
@@ -44,20 +52,38 @@ const CommandsPage: React.FC<CommandsPageProps> = ({ showEditMode, setShowEditMo
     fetchData();
   }, []);
 
+  const askDelete = (id: string) => {
+    setDeleteId(id);
+    setConfirmOpen(true)
+  }
+
   const handleDelete = async (id: string) => {
     try {
       const res = await fetch(`${DATA_ENDPOINT}/${id}.json`, {
         method: "DELETE"
       });
       if (!res.ok) throw new Error("Failed to delete command");
+
       setCommandList(prev => prev.filter(cmd => cmd.id !== id))
       showSnackbar("command deleted", "success")
 
     } catch (error) {
       console.log("Failed to delete command.");
       showSnackbar("Failed to deleted command", "error")
-
     }
+  }
+
+  const handleConfirmDelete = async () => {
+    if (deleteId) {
+      await handleDelete(deleteId)
+    }
+    setConfirmOpen(false);
+    setDeleteId(null);
+  }
+
+  const onCancel = () => {
+    setConfirmOpen(false);
+    setDeleteId(null)
   }
 
   const handleEdit = async (id: string, name: string) => {
@@ -72,7 +98,7 @@ const CommandsPage: React.FC<CommandsPageProps> = ({ showEditMode, setShowEditMo
       <CommandCard
         commandsList={commandsList}
         showEditMode={showEditMode}
-        onDelete={handleDelete}
+        onDelete={askDelete}
         onEdit={handleEdit}
       />
       <AddCommandDialog
@@ -86,6 +112,11 @@ const CommandsPage: React.FC<CommandsPageProps> = ({ showEditMode, setShowEditMo
         showEditMode={showEditMode}
         setShowEditMode={setShowEditMode}
         setOpenAddDialog={setOpenAddDialog}
+      />
+      <ConfirmDialog
+        open={confirmOpen}
+        onConfirm={handleConfirmDelete}
+        onCancel={onCancel}
       />
     </div>
   )
