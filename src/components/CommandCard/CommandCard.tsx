@@ -26,7 +26,7 @@ const CommandCard: React.FC<CommandCardProps> = ({ commandsList, showEditMode, o
 
     const handleCopy = (command: string) => {
         navigator.clipboard.writeText(command)
-            .then(() => showSnackbar("Coppied!", "info"))
+            .then(() => showSnackbar("Copied!", "info"))
             .catch(() => showSnackbar("Copy failed", "info"));
     };
 
@@ -64,13 +64,14 @@ const CommandCard: React.FC<CommandCardProps> = ({ commandsList, showEditMode, o
                             </>
                         ) : (
                             <Button
+                                className='copy-btn-container'
+                                disableRipple
+
                                 sx={{
                                     color: isDark ? "white" : "black",
-                                    margin: '0',
-                                    padding: '0'
                                 }}
                                 onClick={
-                                    () => handleCopy(item.name)}>{<FaRegCopy size={18} />}</Button>
+                                    () => handleCopy(item.name)}>{<FaRegCopy className='copy-btn' size={18} />}</Button>
                         )}
                     </div>
                 </li>

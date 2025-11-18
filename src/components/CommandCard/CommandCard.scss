@@ -11,31 +11,22 @@
     justify-content: space-between;
     align-items: center;
     color: white;
-    cursor: pointer;
+    // cursor: pointer;
     transition: all 0.2s ease-in-out;
+    height: 60px;
 
     &:hover {
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
 
-    &:hover .right {
-      // opacity: 1;
-      button {
-        display: inline-block;
-      }
-    }
-
     .right {
       display: flex;
       gap: 10px;
-      // opacity: 0;
 
       button {
-        // padding: 5px;
         background: transparent;
         border: none;
         cursor: pointer;
-        // display: none;
       }
     }
   }
@@ -43,4 +34,15 @@
 
 .command-cmd {
   color: #16163f;
+}
+
+.copy-btn {
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.copy-btn-container {
+  padding: 0;
+  margin: 0;
 }

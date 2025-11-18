@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import Theme from '../Theme/Theme';
 import { useThemeContext } from '../../context/ThemeContext';
+import { useState } from 'react';
 
 
 interface ExpandableActionButtonProps {
@@ -17,11 +18,15 @@ interface ExpandableActionButtonProps {
 
 export default function ExpandableActionButton({ showEditMode, setShowEditMode, setOpenAddDialog }: ExpandableActionButtonProps) {
     const { toggleTheme } = useThemeContext();
+    const [open, setOpen] = useState<boolean>(false);
 
     const handleEditToggle = () => {
         setShowEditMode((prev) => !prev);
     }
 
+    const handleClick = () => {
+        setOpen((prev) => !prev)
+    }
     return (
         <Box sx={{
             transform: 'translateZ(0px)',
@@ -41,6 +46,8 @@ export default function ExpandableActionButton({ showEditMode, setShowEditMode, 
                     ariaLabel="SpeedDial Actions"
                     icon={<ArrowCircleLeftIcon />}
                     direction="left"
+                    open={open}
+                    onClick={handleClick}
                     sx={{ position: 'fixed', bottom: 20, right: 20, }}
 
                 >{showEditMode ? (
