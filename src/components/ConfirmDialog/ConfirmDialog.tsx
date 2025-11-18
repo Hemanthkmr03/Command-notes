@@ -1,4 +1,4 @@
-import { forwardRef, useRef } from 'react';
+import { useRef } from 'react';
 import { Dialog, DialogActions, DialogTitle, Button, Paper } from "@mui/material";
 import Draggable from "react-draggable";
 import type { PaperProps } from "@mui/material";
@@ -11,7 +11,7 @@ interface ConfirmDialogProps {
     onCancel: () => void;
 }
 
-const PaperComponent = forwardRef<HTMLDivElement, PaperProps>((props, ref) => {
+const PaperComponent = (props: PaperProps) => {
     const nodeRef = useRef<HTMLDivElement>(null);
 
     return (
@@ -23,7 +23,7 @@ const PaperComponent = forwardRef<HTMLDivElement, PaperProps>((props, ref) => {
             <Paper {...props} ref={nodeRef} />
         </Draggable>
     );
-});
+};
 
 export default function ConfirmDialog({
     open,

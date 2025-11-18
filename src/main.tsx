@@ -7,15 +7,15 @@ import { CustomThemeProvider } from './context/ThemeContext.tsx'
 import { SnackbarProvider } from './context/SnackbarContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
-  // <StrictMode>
-  <CustomThemeProvider>
-    <SnackbarProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </SnackbarProvider>
-  </CustomThemeProvider>
-  // </StrictMode>
+  <StrictMode>
+    <CustomThemeProvider>
+      <SnackbarProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </SnackbarProvider>
+    </CustomThemeProvider>
+  </StrictMode>
 
 
 )
