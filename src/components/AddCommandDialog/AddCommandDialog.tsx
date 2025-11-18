@@ -12,8 +12,8 @@ import './AddCommandDialog.scss'
 
 
 
-export default function AddCommandDialog({ openAddDialog, setOpenAddDialog, refreshData, editingCommand, setEditingCommand }) {
-    const theme = useTheme();
+export default function AddCommandDialog({ openAddDialog, setOpenAddDialog, refreshData, editingCommand, setEditingCommand }: any) {
+    const theme: any = useTheme();
     const isDark = theme.palette.mode === "dark";
     const [command, setCommand] = useState('');
     const { showSnackbar } = useSnackbar();

@@ -38,7 +38,7 @@ export const CustomThemeProvider: React.FC<{ children: React.ReactNode }> = ({ c
                     mode,
                     background: {
                         default: mode === "light" ? "#ECECEC" : "#252627",
-                        secondary: mode === "light" ? "#FFFFFF" : "#161616",
+                        // secondary: mode === "light" ? "#FFFFFF" : "#161616",
                     },
                     text: {
                         primary: mode === "light" ? "#214966" : "#fff",

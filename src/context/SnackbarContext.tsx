@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState } from "react";
 
 export type SnackbarSeverity = "success" | "error" | "warning" | "info";
 
@@ -31,7 +31,7 @@ export const useSnackbar = (): SnackbarContextProps => {
     return context;
 };
 
-export const SnackbarProvider = ({ children }: { children: ReactNode }) => {
+export const SnackbarProvider = ({ children }: any) => {
     const [snackbar, setSnackbar] = useState<SnackbarState>({
         open: false,
         message: "",

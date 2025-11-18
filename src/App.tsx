@@ -10,7 +10,7 @@ import SnackBar from './components/SnackBar/SnackBar'
 
 function App() {
   const theme = useTheme();
-  const [showEditMode, setShowEditMode] = useState<Boolean>(false);
+  const [showEditMode, setShowEditMode] = useState<any>(false);
   const { snackbar, closeSnackbar } = useSnackbar();
 
   return (

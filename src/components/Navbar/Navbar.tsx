@@ -1,6 +1,6 @@
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { useState, type SyntheticEvent } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
 
@@ -8,7 +8,7 @@ export default function Navbar() {
   const [value, setValue] = useState<number>(0);
   const theme = useTheme();
 
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
+  const handleChange = ({ newValue }: any) => {
     setValue(newValue);
   };
 

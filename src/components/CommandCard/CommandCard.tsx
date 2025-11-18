@@ -21,7 +21,7 @@ interface CommandCardProps {
 
 const CommandCard: React.FC<CommandCardProps> = ({ commandsList, showEditMode, onDelete, onEdit }) => {
     const { showSnackbar } = useSnackbar();
-    const theme = useTheme();
+    const theme: any = useTheme();
     const isDark = theme.palette.mode === "dark";
 
     const handleCopy = (command: string) => {

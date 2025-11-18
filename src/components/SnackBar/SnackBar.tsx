@@ -1,5 +1,3 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import './SnackBar.scss'
 import { Alert } from '@mui/material';
@@ -28,7 +26,6 @@ export default function SnackBar({
                 autoHideDuration={duration}
                 onClose={onClose}
                 message={message}
-            // severity={severity}
             >
                 <Alert severity={severity}>{message}</Alert>
             </Snackbar>
