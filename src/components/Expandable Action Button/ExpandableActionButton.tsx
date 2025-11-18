@@ -43,19 +43,25 @@ export default function ExpandableActionButton({ showEditMode, setShowEditMode, 
                     direction="left"
                     sx={{ position: 'fixed', bottom: 20, right: 20, }}
 
-                >
+                >{showEditMode ? (
+                    null
+                ) : (
                     <SpeedDialAction
                         key="Add"
                         icon={<AddIcon />}
                         onClick={() => setOpenAddDialog(true)}
                         tooltipTitle="Add"
-
                     />
+                )}
                     <SpeedDialAction
                         key="Edit"
                         icon={<EditIcon />}
                         onClick={handleEditToggle}
                         tooltipTitle={showEditMode ? "Exit Edit Mode" : "Edit Mode"}
+                        sx={{
+                            color: showEditMode ? 'warning.main' : ''
+                        }}
+
                     />
                     <SpeedDialAction
                         key='Theme'

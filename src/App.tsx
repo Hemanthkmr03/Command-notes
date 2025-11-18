@@ -5,10 +5,13 @@ import NotesPage from './pages/NotesPage/NotesPage'
 import Navbar from './components/Navbar/Navbar'
 import { Box, useTheme } from '@mui/material'
 import { useState } from 'react'
+import { useSnackbar } from './context/SnackbarContext'
+import SnackBar from './components/SnackBar/SnackBar'
 
 function App() {
   const theme = useTheme();
   const [showEditMode, setShowEditMode] = useState<Boolean>(false);
+  const { snackbar, closeSnackbar } = useSnackbar();
 
   return (
     <Box className='app'
@@ -21,6 +24,13 @@ function App() {
         <Route path='/notes' element={<NotesPage />} />
         <Route path='*' element={<CommandsPage showEditMode={showEditMode} setShowEditMode={setShowEditMode} />} />
       </Routes>
+      <SnackBar
+        open={snackbar.open}
+        message={snackbar.message}
+        severity={snackbar.severity}
+        duration={snackbar.duration}
+        onClose={closeSnackbar}
+      />
     </Box>
   )
 }

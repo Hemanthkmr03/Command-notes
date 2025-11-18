@@ -2,32 +2,36 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import './SnackBar.scss'
+import { Alert } from '@mui/material';
 
 
-export default function SnackBar({ message: string }) {
-    const [open, setOpen] = React.useState(false);
+interface SnackBarProps {
+    open: boolean;
+    message: string;
+    severity?: 'success' | "error" | "warning" | "info";
+    duration?: number;
+    onClose: () => void;
+}
 
-    const handleClick = () => {
-        setOpen(true);
-    };
-
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpen(false);
-    };
+export default function SnackBar({
+    open,
+    message,
+    severity = "info",
+    duration = 1500,
+    onClose,
+}: SnackBarProps) {
 
     return (
         <div>
-            <Button onClick={handleClick}>Open Snackbar</Button>
             <Snackbar
                 open={open}
-                autoHideDuration={1500}
-                onClose={handleClose}
+                autoHideDuration={duration}
+                onClose={onClose}
                 message={message}
-            />
+            // severity={severity}
+            >
+                <Alert severity={severity}>{message}</Alert>
+            </Snackbar>
         </div>
     );
 }

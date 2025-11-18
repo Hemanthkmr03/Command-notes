@@ -16,9 +16,20 @@ const ThemeContext = createContext<ThemeContexProps>({
 export const useThemeContext = () => useContext(ThemeContext);
 
 export const CustomThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [mode, setMode] = useState<ThemeMode>("light");
+    const [mode, setMode] = useState<ThemeMode>(() => {
+        const saveMode = localStorage.getItem("themeMode")
+        return (saveMode === "light" || saveMode === "dark") ? saveMode : "light"
+    });
 
-    const toggleTheme = () => setMode((prev) => (prev === "light" ? "dark" : "light"));
+
+
+    const toggleTheme = () => {
+        setMode((prev) => {
+            const newMode = prev === "light" ? "dark" : "light";
+            localStorage.setItem("themeMode", newMode);
+            return newMode;
+        })
+    }
 
     const theme = useMemo(
         () =>

@@ -5,6 +5,7 @@ import { Button } from '@mui/material';
 import React from 'react';
 import { useTheme } from '@emotion/react';
 import { FaRegCopy } from "react-icons/fa";
+import { useSnackbar } from '../../context/SnackbarContext';
 
 interface Command {
     id: string;
@@ -19,14 +20,14 @@ interface CommandCardProps {
 }
 
 const CommandCard: React.FC<CommandCardProps> = ({ commandsList, showEditMode, onDelete, onEdit }) => {
-
+    const { showSnackbar } = useSnackbar();
     const theme = useTheme();
     const isDark = theme.palette.mode === "dark";
 
     const handleCopy = (command: string) => {
         navigator.clipboard.writeText(command)
-            .then(() => alert("Coppied!"))
-            .catch(() => alert("Copy failed"));
+            .then(() => showSnackbar("Coppied!", "info"))
+            .catch(() => showSnackbar("Copy failed", "info"));
     };
 
 
@@ -52,13 +53,13 @@ const CommandCard: React.FC<CommandCardProps> = ({ commandsList, showEditMode, o
                                     onClick={() => onEdit(item.id, item.name)}
                                     sx={{
                                         cursor: "pointer",
-                                        color: '#16163F'
+                                        color: isDark ? "#FFF" : "#214966",
                                     }} />
                                 <DeleteIcon
                                     onClick={() => onDelete(item.id)}
                                     sx={{
                                         cursor: "pointer",
-                                        color: '#16163F'
+                                        color: isDark ? "#FFF" : "#214966",
                                     }} />
                             </>
                         ) : (

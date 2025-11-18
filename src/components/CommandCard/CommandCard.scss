@@ -1,15 +1,18 @@
 .command-card {
+  min-height: 92.6vh;
   .command-card-cmd {
+    width: 95%;
     list-style: none;
     background: rgb(201, 201, 201);
     padding: 15px;
-    margin: 20px 10px;
+    margin: 20px auto;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: white;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
 
     &:hover {
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;

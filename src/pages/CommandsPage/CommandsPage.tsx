@@ -1,9 +1,10 @@
 import CommandCard from '../../components/CommandCard/CommandCard';
 import './CommandsPage.scss'
 import { useEffect, useState } from 'react';
-import { DATA_ENDPOINT } from '../../constant.js'
+import { DATA_ENDPOINT } from '../../constant.ts'
 import AddCommandDialog from '../../components/AddCommandDialog/AddCommandDialog.js';
 import ExpandableActionButton from '../../components/Expandable Action Button/ExpandableActionButton.js';
+import { useSnackbar } from '../../context/SnackbarContext.js';
 
 interface CommandsPageProps {
   showEditMode: boolean;
@@ -20,7 +21,7 @@ const CommandsPage: React.FC<CommandsPageProps> = ({ showEditMode, setShowEditMo
   const [commandsList, setCommandList] = useState<Command[]>([]);
   const [openAddDialog, setOpenAddDialog] = useState<boolean>(false);
   const [editingCommand, setEditingCommand] = useState<Command | null>(null);
-
+  const { showSnackbar } = useSnackbar();
 
   const fetchData = async () => {
     try {
@@ -50,9 +51,11 @@ const CommandsPage: React.FC<CommandsPageProps> = ({ showEditMode, setShowEditMo
       });
       if (!res.ok) throw new Error("Failed to delete command");
       setCommandList(prev => prev.filter(cmd => cmd.id !== id))
+      showSnackbar("command deleted", "success")
 
     } catch (error) {
       console.log("Failed to delete command.");
+      showSnackbar("Failed to deleted command", "error")
 
     }
   }

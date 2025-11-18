@@ -5,8 +5,10 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { DATA_ENDPOINT } from '../../constant.js';
+import { DATA_ENDPOINT } from '../../constant.ts';
 import { useTheme } from '@emotion/react';
+import { useSnackbar } from '../../context/SnackbarContext.js';
+import './AddCommandDialog.scss'
 
 
 
@@ -14,6 +16,7 @@ export default function AddCommandDialog({ openAddDialog, setOpenAddDialog, refr
     const theme = useTheme();
     const isDark = theme.palette.mode === "dark";
     const [command, setCommand] = useState('');
+    const { showSnackbar } = useSnackbar();
 
     useEffect(() => {
         if (editingCommand) {
@@ -30,7 +33,10 @@ export default function AddCommandDialog({ openAddDialog, setOpenAddDialog, refr
     };
 
     const handleSubmit = async () => {
-        if (!command.trim()) return alert("Please enter a command");
+        if (!command.trim()) {
+            showSnackbar("Please enter a command", "warning");
+            return;
+        }
 
         try {
             let res
@@ -42,7 +48,7 @@ export default function AddCommandDialog({ openAddDialog, setOpenAddDialog, refr
                     body: JSON.stringify({ name: command }),
                 });
                 if (!res.ok) throw new Error("Failed to update command")
-                alert("command updated successfully!");
+                showSnackbar("command updated successfully!", "success")
 
             } else {
 
@@ -52,7 +58,7 @@ export default function AddCommandDialog({ openAddDialog, setOpenAddDialog, refr
                     body: JSON.stringify({ name: command }),
                 });
                 if (!res.ok) throw new Error("Failed to add command")
-                alert("command added successfully!");
+                showSnackbar("command added successfully!", "success")
 
             }
 
@@ -62,7 +68,7 @@ export default function AddCommandDialog({ openAddDialog, setOpenAddDialog, refr
 
         } catch (error) {
             console.log("Error adding command:", error);
-            alert("Something went wrong.")
+            showSnackbar("Something went wrong.", "error")
         }
     }
 
@@ -85,6 +91,7 @@ export default function AddCommandDialog({ openAddDialog, setOpenAddDialog, refr
                 <DialogContent>
                     <form id="subscription-form">
                         <TextField
+                            className='cmd-input'
                             autoFocus
                             required
                             margin="dense"
@@ -95,6 +102,8 @@ export default function AddCommandDialog({ openAddDialog, setOpenAddDialog, refr
                             fullWidth
                             variant="outlined"
                             value={command}
+                            multiline
+                            rows={5}
                             onChange={(e) => setCommand(e.target.value)}
                         />
                     </form>
