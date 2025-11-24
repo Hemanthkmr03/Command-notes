@@ -1,0 +1,22 @@
+.speedDial-container-custom {
+  button {
+    width: 42px;
+    height: 42px;
+    min-height: unset;
+  }
+}
+
+#SpeedDialActions-actions {
+  padding-right: 40px;
+
+  button {
+    border: 1px solid #ffffff40;
+    width: 36px;
+    height: 36px;
+    min-height: unset;
+
+    svg {
+      font-size: 1rem;
+    }
+  }
+}

@@ -2,7 +2,7 @@ import './NotesPage.scss'
 
 const NotesPage = () => {
   return (
-    <div>NotesPage</div>
+    <div className='notes-container-wrapper'>Notes Page</div>
   )
 }
 

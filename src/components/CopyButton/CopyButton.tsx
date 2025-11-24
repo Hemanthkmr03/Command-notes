@@ -6,7 +6,7 @@ export default function CopyButton() {
 
     const handleCopy = () => {
         navigator.clipboard.writeText(textToCopy)
-            .then(() => alert("Copied!"))
+            .then(() => alert("Copied"))
             .catch(() => alert("Copy failed"));
     };
 

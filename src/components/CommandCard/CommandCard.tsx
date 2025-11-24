@@ -26,7 +26,7 @@ const CommandCard: React.FC<CommandCardProps> = ({ commandsList, showEditMode, o
 
     const handleCopy = (command: string) => {
         navigator.clipboard.writeText(command)
-            .then(() => showSnackbar("Copied!", "info"))
+            .then(() => showSnackbar("Copied.", "info"))
             .catch(() => showSnackbar("Copy failed", "info"));
     };
 

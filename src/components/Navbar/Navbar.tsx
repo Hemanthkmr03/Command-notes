@@ -3,6 +3,7 @@ import Tab from '@mui/material/Tab';
 import { useState, type SyntheticEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
+import './Navbar.scss';
 
 export default function Navbar() {
   const [value, setValue] = useState<number>(0);
@@ -27,6 +28,7 @@ export default function Navbar() {
         value={value}
         onChange={handleChange}
         aria-label="tabs example"
+        className='hero-nav-menu'
         sx={{
           display: "flex",
           justifyContent: "center",
