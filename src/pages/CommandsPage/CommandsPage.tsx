@@ -62,14 +62,14 @@ const CommandsPage: React.FC<CommandsPageProps> = ({ showEditMode, setShowEditMo
       const res = await fetch(`${DATA_ENDPOINT}/${id}.json`, {
         method: "DELETE"
       });
-      if (!res.ok) throw new Error("Failed to delete command");
+      if (!res.ok) throw new Error("Failed to delete command,");
 
       setCommandList(prev => prev.filter(cmd => cmd.id !== id))
-      showSnackbar("command deleted", "success")
+      showSnackbar("Command deleted.", "success")
 
     } catch (error) {
       console.log("Failed to delete command.");
-      showSnackbar("Failed to deleted command", "error")
+      showSnackbar("Failed to deleted command.", "error")
     }
   }
 
@@ -94,7 +94,7 @@ const CommandsPage: React.FC<CommandsPageProps> = ({ showEditMode, setShowEditMo
 
 
   return (
-    <div>
+    <div className='command-container-wrapper'>
       <CommandCard
         commandsList={commandsList}
         showEditMode={showEditMode}

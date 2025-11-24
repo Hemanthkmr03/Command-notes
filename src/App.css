@@ -1,3 +1,8 @@
-.app{
-    background: black;
+.app {
+  background: black;
+}
+
+.MuiTabs-scroller .MuiTabs-indicator {
+  border-radius: 32px;
+  height: 3px;
 }

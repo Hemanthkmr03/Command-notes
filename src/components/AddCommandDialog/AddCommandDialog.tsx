@@ -48,7 +48,7 @@ export default function AddCommandDialog({ openAddDialog, setOpenAddDialog, refr
                     body: JSON.stringify({ name: command }),
                 });
                 if (!res.ok) throw new Error("Failed to update command")
-                showSnackbar("command updated successfully!", "success")
+                showSnackbar("Command updated successfully.", "success")
 
             } else {
 

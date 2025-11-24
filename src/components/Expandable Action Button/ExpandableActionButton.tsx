@@ -7,6 +7,7 @@ import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import Theme from '../Theme/Theme';
 import { useThemeContext } from '../../context/ThemeContext';
 import { useState } from 'react';
+import './ExpandableActionButton.scss';
 
 
 interface ExpandableActionButtonProps {
@@ -49,7 +50,7 @@ export default function ExpandableActionButton({ showEditMode, setShowEditMode, 
                     open={open}
                     onClick={handleClick}
                     sx={{ position: 'fixed', bottom: 20, right: 20, }}
-
+                    className='speedDial-container-custom'
                 >{showEditMode ? (
                     null
                 ) : (
